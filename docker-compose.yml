@@ -9,3 +9,8 @@ services:
     build:
       context: .
       dockerfile: docker/bar/Dockerfile
+  baz:
+    image: "ghcr.io/0x4r45h/github-actions/github-actions.baz:v3"
+    build:
+      context: .
+      dockerfile: docker/baz/Dockerfile

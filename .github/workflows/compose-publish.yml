@@ -44,7 +44,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: publish
-        uses: ./.github/actions/docker-compose-builder
-#        uses: pennsignals/publish_docker-compose@v0.1.0
+        uses: ./.github/actions/arash-ci
         with:
           docker_compose_files: '-f docker-compose.yml'
+          services: 'foo baz'
