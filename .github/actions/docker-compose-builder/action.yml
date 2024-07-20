@@ -18,6 +18,5 @@ runs:
   using: "composite"
   steps:
     - id: publish
-#      run: ${{ github.action_path }}/src/publish.sh "${{ inputs.profiles }}" "${{ inputs.docker_compose_files }}"
       run: docker compose ${{ inputs.docker_compose_files }} ${{ inputs.profiles }} build && docker compose ${{ inputs.docker_compose_files }} ${{ inputs.profiles }} push
       shell: bash
