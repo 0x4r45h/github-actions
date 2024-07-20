@@ -14,13 +14,10 @@ inputs:
     description: "docker-compose files to build and publish images from, multiple compose files can be passed -f foo.yml -f bar.yml"
     required: false
     default: '-f docker-compose.yml'
-  repo_token:
-    description: "Github Repo token"
-    required: false
-    default: ''
 runs:
   using: "composite"
   steps:
     - id: publish
-      run: ${{ github.action_path }}/src/publish.sh "${{ inputs.profiles }}" "${{ inputs.docker_compose_files }}" ${{ inputs.repo_token }}
+#      run: ${{ github.action_path }}/src/publish.sh "${{ inputs.profiles }}" "${{ inputs.docker_compose_files }}"
+      run: docker compose ${{ inputs.docker_compose_files }} ${{ inputs.profiles }} build && docker compose ${{ inputs.docker_compose_files }} ${{ inputs.profiles }} push
       shell: bash
