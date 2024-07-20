@@ -41,5 +41,6 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: publish
-        uses: ./.github/actions/arash-ci
+      - name: Docker Compose Build & Push
+        uses: 0x4r45h/docker-compose-ci@v0.1.0
+
