@@ -1,9 +1,11 @@
 services:
   foo:
+    image: "ghcr.io/0x4r45h/github-actions/github-actions.foo:v1"
     build:
       context: .
       dockerfile: Dockerfile
   bar:
+    image: "ghcr.io/0x4r45h/github-actions/github-actions.bar:v1"
     build:
       context: .
       dockerfile: docker/bar/Dockerfile
