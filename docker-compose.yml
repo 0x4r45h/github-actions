@@ -1,6 +1,6 @@
 services:
   foo:
-    image: "ghcr.io/0x4r45h/github-actions/github-actions.foo:v1"
+    image: ${FOO_IMAGE_NAME}
     build:
       context: .
       dockerfile: Dockerfile
