@@ -1,0 +1,9 @@
+services:
+  foo:
+    build:
+      context: .
+      dockerfile: Dockerfile
+  bar:
+    build:
+      context: .
+      dockerfile: docker/bar/Dockerfile
