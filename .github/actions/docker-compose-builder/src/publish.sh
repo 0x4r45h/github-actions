@@ -6,7 +6,7 @@ GITHUB_REPOSITORY=$(echo "$GITHUB_REPOSITORY" | awk '{print tolower($0)}')
 echo "PROFILES=$PROFILES"
 echo "COMPOSE_FILES=$COMPOSE_FILES"
 
-docker login ghcr.io -u "${GITHUB_REF}" -p "${REPO_TOKEN}"
+#docker login ghcr.io -u "${GITHUB_REF}" -p "${REPO_TOKEN}"
 docker compose $COMPOSE_FILES $PROFILES build
 docker compose $COMPOSE_FILES $PROFILES push
 #docker compose "$COMPOSE_FILES" "$PROFILES" push
