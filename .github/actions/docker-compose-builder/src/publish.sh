@@ -1,15 +1,15 @@
-VERSION="$1"
-OVERRIDE="$2"
+PROFILES="$1"
+COMPOSE_FILES="$2"
 REPO_TOKEN="$3"
 GITHUB_REPOSITORY=$(echo "$GITHUB_REPOSITORY" | awk '{print tolower($0)}')
 
-echo "VERSION=$VERSION"
-echo "OVERRIDE=$OVERRIDE"
+echo "PROFILES=$PROFILES"
+echo "OVERRIDE=$COMPOSE_FILES"
 
 docker login ghcr.io -u "${GITHUB_REF}" -p "${REPO_TOKEN}"
 
-docker-compose -f docker-compose.yml -f "$OVERRIDE" build
-docker-compose -f docker-compose.yml -f "$OVERRIDE" push
+docker-compose "$COMPOSE_FILES" "$PROFILES" build
+docker-compose "$COMPOSE_FILES" "$PROFILES" push
 #IMAGES=$(docker inspect --format='{{.Image}}' "$(docker compose ps -aq)")
 
 #echo "IMAGES: $IMAGES"

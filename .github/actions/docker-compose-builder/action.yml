@@ -6,35 +6,21 @@ branding:
   icon: "database"
   color: "red"
 inputs:
-  version:
-    description: "Release version (tag)"
+  profiles:
+    description: "Set docker compose --profile flag, for multiple profiles you can pass --profile foo --profile bar"
     required: false
-    default: ''
-  docker_compose:
-    description: "docker-compose file to build and publish images from"
-    required: true
+    default: "--profile '*'"
+  docker_compose_files:
+    description: "docker-compose files to build and publish images from, multiple compose files can be passed -f foo.yml -f bar.yml"
+    required: false
+    default: '-f docker-compose.yml'
   repo_token:
     description: "Github Repo token"
     required: false
     default: ''
-outputs:
-  tag:
-    description: "Tag that was published"
-    value: ${{ steps.tag.outputs.semver }}
 runs:
   using: "composite"
   steps:
-    - id: tag
-      run: |
-        # if VERSION is not set, get it from git repo
-        VERSION="${{ inputs.version }}"
-        if [ -z "$VERSION" ]; then
-            VERSION=$(${{ github.action_path }}/src/version.sh)
-        fi
-        echo "VERSION: $VERSION"
-        echo "::set-output name=semver::$(echo $VERSION)"
-        echo "VERSION=$VERSION" >> $GITHUB_ENV
-      shell: bash
     - id: publish
-      run: ${{ github.action_path }}/src/publish.sh $VERSION ${{ inputs.docker_compose }} ${{ inputs.repo_token }}
+      run: ${{ github.action_path }}/src/publish.sh ${{ inputs.profiles }} ${{ inputs.docker_compose_files }} ${{ inputs.repo_token }}
       shell: bash

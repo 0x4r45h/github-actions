@@ -7,7 +7,7 @@ name: Docker
 
 on:
   push:
-    branches: [ "feat/docker-compose" ]
+    branches: [ "feat/upgrade-docker-publish" ]
     # Publish semver tags as releases.
     tags: [ 'v*.*.*' ]
   pull_request:
@@ -36,6 +36,6 @@ jobs:
         uses: ./.github/actions/docker-compose-builder
 #        uses: pennsignals/publish_docker-compose@v0.1.0
         with:
-          docker_compose: 'docker-compose.yml' # required
+          docker_compose: 'docker-compose.yml'
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
 
