@@ -7,7 +7,7 @@ name: Docker
 
 on:
   push:
-    branches: [ "feat/up" ]
+    branches: [ "feat/upgrade-docker-publish" ]
     # Publish semver tags as releases.
     tags: [ 'v*.*.*' ]
   pull_request:
@@ -19,8 +19,6 @@ env:
   # github.repository as <account>/<repo>
   IMAGE_NAME: ${{ github.repository }}
   FOO_IMAGE_NAME: "ghcr.io/0x4r45h/github-actions/github-actions.foo:v2"
-
-
 jobs:
   build:
 
@@ -33,18 +31,5 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Login against a Docker registry except on PR
-      # https://github.com/docker/login-action
-      - name: Log into registry ${{ env.REGISTRY }}
-        if: github.event_name != 'pull_request'
-        uses: docker/login-action@343f7c4344506bcbf9b4de18042ae17996df046d # v3.0.0
-        with:
-          registry: ${{ env.REGISTRY }}
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
       - name: publish
-        uses: ./.github/actions/docker-compose-builder
-#        uses: pennsignals/publish_docker-compose@v0.1.0
-        with:
-          docker_compose_files: '-f docker-compose.yml'
+        uses: ./.github/actions/arash-ci

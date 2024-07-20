@@ -1,5 +1,5 @@
 # action.yml
-name: "Docker-Compose Publish"
+name: "Docker Compose Publish"
 author: "Darryl Mendillo"
 description: "Publish all docker containers in docker-compose file"
 branding:
